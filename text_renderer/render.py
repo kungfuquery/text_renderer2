@@ -24,7 +24,7 @@ import os
 
 class Render:
     def __init__(self, cfg: RenderCfg):
-        self.vocab_dict = torch.load('/content/vocab_dict.pt')
+        self.vocab_dict = torch.load('/Users/apple/text_renderer2/vocab_dict.pt')
 
         self.cfg = cfg
         self.layout = cfg.layout
@@ -50,13 +50,15 @@ class Render:
         self.bg_manager = BgManager(cfg.bg_dir, cfg.pre_load_bg_img)
 
     def check_valid(self, text, font_path):
-      font_name = os.path.basename(font_path)
-      font_vocab = self.vocab_dict[font_name]
+        font_name = os.path.basename(font_path)
+        if font_name not in self.vocab_dict:
+            return False
+        font_vocab = self.vocab_dict[font_name]
 
-      if set(text) <= font_vocab:
-          return True
-      else:
-          return False
+        if set(text) <= font_vocab:
+            return True
+        else:
+            return False
     @retry
     def __call__(self, *args, **kwargs) -> Tuple[np.ndarray, str]:
         try:

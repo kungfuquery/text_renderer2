@@ -20,3 +20,4 @@ node_modules/
 package.json
 package-lock.json
 text_renderer/corpus/c4_ja_0.txt
+text_renderer/bg/*
