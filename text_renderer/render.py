@@ -160,7 +160,6 @@ class Render:
           font_texts: List[FontText] = [it.sample() for it in self.corpus]
           if self.check_valid(font_texts[0].text, font_texts[0].font_path):
             break
-          print(font_texts[0].text, font_texts[0].font_path)
 
 
         bg = self.bg_manager.get_bg()
