@@ -19,10 +19,13 @@ from text_renderer.utils.math_utils import PerspectiveTransform
 from text_renderer.utils.bbox import BBox
 from text_renderer.utils.font_text import FontText
 from text_renderer.utils.types import FontColor, is_list
-
+import torch
+import os
 
 class Render:
     def __init__(self, cfg: RenderCfg):
+        self.vocab_dict = torch.load('/content/vocab_dict.pt')
+
         self.cfg = cfg
         self.layout = cfg.layout
         if isinstance(cfg.corpus, list) and len(cfg.corpus) == 1:
@@ -46,6 +49,14 @@ class Render:
 
         self.bg_manager = BgManager(cfg.bg_dir, cfg.pre_load_bg_img)
 
+    def check_valid(self, text, font_path):
+      font_name = os.path.basename(font_path)
+      font_vocab = self.vocab_dict[font_name]
+
+      if set(text) <= font_vocab:
+          return True
+      else:
+          return False
     @retry
     def __call__(self, *args, **kwargs) -> Tuple[np.ndarray, str]:
         try:
@@ -145,7 +156,12 @@ class Render:
         return img, font_text.text, cropped_bg, transformed_text_mask
 
     def gen_multi_corpus(self) -> Tuple[PILImage, str, PILImage, PILImage]:
-        font_texts: List[FontText] = [it.sample() for it in self.corpus]
+        while True:
+          font_texts: List[FontText] = [it.sample() for it in self.corpus]
+          if self.check_valid(font_texts[0].text, font_texts[0].font_path):
+            break
+          print(font_texts[0].text, font_texts[0].font_path)
+
 
         bg = self.bg_manager.get_bg()
 
