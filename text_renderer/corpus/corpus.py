@@ -93,6 +93,7 @@ class Corpus:
                 f"{self.__class__.__name__} {font_path} not support chars: {intersect}"
             )
             raise RetryError(err_msg)
+            logger.debug(err_msg)
 
         return FontText(font, text, font_path, self.cfg.horizontal)
 

@@ -11,7 +11,7 @@ from text_renderer.config import (
     UniformPerspectiveTransformCfg,
 )
 from text_renderer.effect.curve import Curve
-CURRENT_DIR = Path('/Users/apple/text_renderer/text_renderer')
+CURRENT_DIR = Path('/Users/apple/text_renderer2/text_renderer')
 import imgaug.augmenters as iaa
 
 text_effect_cfg = Effects([
@@ -43,7 +43,7 @@ my_corpus = CharCorpus(
 
 def story_data():
     return GeneratorCfg(
-        num_image=100,
+        num_image=1000000,
         save_dir=CURRENT_DIR / "output",
         render_cfg=RenderCfg(
               corpus= [my_corpus, my_corpus],

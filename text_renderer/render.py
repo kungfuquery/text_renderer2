@@ -98,8 +98,9 @@ class Render:
                 np_img = self.norm(np_img)
             return np_img, text
         except Exception as e:
-            logger.exception(e)
-            raise e
+            pass
+            # logger.exception(e)
+            # raise e
 
     def gen_single_corpus(self) -> Tuple[PILImage, str, PILImage, PILImage]:
         font_text = self.corpus.sample()
