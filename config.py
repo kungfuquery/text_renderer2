@@ -11,7 +11,7 @@ from text_renderer.config import (
     UniformPerspectiveTransformCfg,
 )
 from text_renderer.effect.curve import Curve
-CURRENT_DIR = Path('/Users/apple/text_renderer2/text_renderer')
+CURRENT_DIR = Path('/content/text_renderer2/workspace')
 import imgaug.augmenters as iaa
 
 text_effect_cfg = Effects([
@@ -30,7 +30,7 @@ extra_text_effect_cfg = Effects([
 
 my_corpus = CharCorpus(
     CharCorpusCfg(
-        text_paths=[CURRENT_DIR/"corpus/c4_ja_0.txt"] ,
+        text_paths=[CURRENT_DIR/"corpus/c4_ja_6.txt"] ,
         length=(3,39),
         font_size=(35, 68),
 
