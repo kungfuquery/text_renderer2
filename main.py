@@ -53,6 +53,7 @@ class DBWriterProcess(Process):
                     name = "{:09d}".format(exist_count + count)
                     db.write(name, m["image"], m["label"])
                     count += 1
+                    logger.info(f'count: {count}')
                     if count % log_period == 0:
                         logger.info(
                             f"{(count/num_image)*100:.2f}%({count}/{num_image}) {log_period/(time.time() - start + 1e-8):.1f} img/s"
