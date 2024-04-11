@@ -24,7 +24,7 @@ import os
 
 class Render:
     def __init__(self, cfg: RenderCfg):
-        self.vocab_dict = torch.load('/Users/apple/text_renderer2/vocab_dict.pt')
+        self.vocab_dict = torch.load('/content/text_renderer2/vocab_dict.pt')
 
         self.cfg = cfg
         self.layout = cfg.layout
